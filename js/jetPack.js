@@ -235,6 +235,18 @@
                 // Initialize the mini-application
                 await Telegram.WebApp.ready()
 
+                // Call the expand method to open to full height
+                Telegram.WebApp.expand()
+
+                // Set header color
+                Telegram.WebApp.setHeaderColor('#6039ff')
+
+                // Show progress
+                Telegram.WebApp.MainButton.showProgress(true)
+
+                // Disable vertical swipes
+                Telegram.WebApp.disableVerticalSwipes()
+
                 // Decode data
                 let decodedString = decodeURIComponent(Telegram.WebApp.initData)
 
