@@ -33,6 +33,7 @@
         #conn = null
         #chainId = ''
         #jwAddress = ''
+        #jwBalances = {}
         #pubKey = ''
         #isConnected = false
         #connectionInterval = 500
@@ -109,9 +110,16 @@
             if (data.type === 'address') {
                 // Save data
                 this.#jwAddress = data.address
+                this.#jwBalances = data.balances
 
                 // Emit an event for address reception
                 this._emit('addressReceived', data.address)
+            } else if (data.type === 'balances') {
+                // Save data
+                this.#jwBalances = data.balances
+
+                // Emit an event for balances reception
+                this._emit('balancesReceived', data.hash)
             } else if (data.type === 'tx') {
                 // Emit an event for transaction reception
                 this._emit('txReceived', data.hash)
@@ -275,6 +283,36 @@
         }
 
 
+        // Public method to load balances
+        loadBalances() {
+            return new Promise((resolve, reject) => {
+                if (!this.#isConnected || !this.#conn) {
+                    return reject('No connection established.')
+                }
+
+                // Generate a random ID
+                const requestId = this._generateRandomId()
+
+                // Save callback
+                this.#callbacks[requestId] = response => {
+                    response.type === 'error'
+                        ? reject(response.message)
+                        : resolve(response)
+                }
+
+                // Send message
+                this.#conn.send({
+                    method: 'loadBalances',
+                    data: {
+                        peer_id: this.#peerID,
+                        chain_id: this.#chainId,
+                        request_id: requestId
+                    }
+                })
+            })
+        }
+
+
         // Public method to send Tx
         sendTx(messages) {
             return new Promise((resolve, reject) => {
@@ -317,6 +355,12 @@
         // Public method to get address
         getAddress() {
             return this.#jwAddress
+        }
+
+
+        // Public method to get balances
+        getBalances() {
+            return this.#jwBalances
         }
 
 

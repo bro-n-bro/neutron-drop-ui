@@ -124,10 +124,8 @@ body
     min-height:         fill-available;
     padding: 40px;
 
-    text-align: center;
-
     color: #fff;
-    background: #000;
+    background: #111;
 }
 
 
@@ -149,106 +147,162 @@ button
 }
 
 
+.data
+{
+    width: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+
+.label
+{
+    font-size: 14px;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+
+.field
+{
+    position: relative;
+
+    padding: 1px;
+
+    border-radius: 10px;
+    background: linear-gradient(to bottom,  #5d33ce 0%,#200750 100%);
+}
+
+
+.input,
+.input:focus
+{
+    font-family: var(--font_family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+
+    display: block;
+
+    width: 100%;
+    height: 48px;
+    padding: 0 15px;
+
+    transition: .2s linear;
+    transition-property: border-color, opacity;
+
+    color: currentColor;
+    border: 1px solid #1a0242;
+    border-radius: 10px;
+    background: #170232;
+}
+
+
+
+.amount .denom
+{
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    height: 100%;
+    padding: 0 16px;
+
+    text-transform: uppercase;
+}
+
+
+
+.amount .max
+{
+    font-size: 12px;
+
+    opacity: .5;
+}
+
+
 
 .logo
 {
     font-size: 40px;
     font-weight: 700;
 
-    position: absolute;
-    top: 0;
-    left: 0;
-
     width: 100%;
     padding: 40px;
 
+    text-align: center;
     text-transform: uppercase;
 }
 
 
-.connection_status
-{
-    width: 100%;
-    margin-bottom: 20px;
 
-    text-align: center;
+#address
+{
+    display: none;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    width: 100%;
+    margin-bottom: 40px;
 }
 
 
-.connection_status span
+
+.pion_swap
 {
     position: relative;
 
     display: none;
 
-    padding-left: 15px;
-
-    vertical-align: top;
+    width: 100%;
 }
 
 
-.connection_status span:before
+.pion_swap .swap_btn
 {
+    margin-top: 28px;
+}
+
+
+.pion_swap .success
+{
+    font-size: 20px;
+
     position: absolute;
+    z-index: 5;
     top: 0;
-    bottom: 0;
     left: 0;
 
-    display: block;
+    display: none;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 
-    width: 5px;
-    height: 5px;
-    margin: auto 0;
-
-    content: '';
-
-    border-radius: 50%;
-}
-
-
-.connection_status span.green:before
-{
-    background: green;
-}
-
-.connection_status span.red:before
-{
-    background: red;
-}
-
-
-.connection_status span.show
-{
-    display: inline-block;
-}
-
-
-.tx_result
-{
     width: 100%;
-    margin-bottom: 20px;
+    height: 100%;
 
     text-align: center;
+
+    background: #111;
 }
 
-.tx_result:empty
-{
-    display: none;
-}
-
-
-#address
-{
-    width: 100%;
-    margin-bottom: 20px;
-
-    text-align: center;
-}
-
-#address:empty
-{
-    display: none;
-}
 
 
 .btn
@@ -258,8 +312,8 @@ button
 
     display: block;
 
-    width: 240px;
-    height: 56px;
+    width: 100%;
+    height: 48px;
 
     cursor: pointer;
     text-align: center;
@@ -268,11 +322,4 @@ button
     color: currentColor;
     border-radius: 10px;
     background: linear-gradient(to bottom,  #6be3fd 0%,#002749 100%);
-}
-
-
-.btn.send_btn,
-.btn.pool_btn
-{
-    display: none;
 }

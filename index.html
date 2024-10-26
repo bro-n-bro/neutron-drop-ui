@@ -24,22 +24,36 @@
 	</head>
 
 	<body>
-		<div class="logo">LOGO</div>
+		<div class="data">
+			<div class="logo">LOGO</div>
 
-		<div class="connection_status">
-			<span class="green">Connected</span>
-			<span class="red" style="display: inline-block;">Disconnected</span>
+			<div id="address">
+				<span>Your address:</span>
+				<span class="val"></span>
+			</div>
+
+			<div class="pion_swap">
+				<div class="amount">
+					<div class="label">
+						Amount:
+
+						<span class="max">Max.: <span class="val"></span> TIA</span>
+					</div>
+
+					<div class="field">
+						<input type="number" inputmode="numeric" value="" class="input" placeholder="0.00">
+
+						<div class="denom">TIA</div>
+					</div>
+				</div>
+
+				<button class="btn swap_btn">Swap to dTIA</button>
+
+				<div class="success">Swap Done</div>
+			</div>
+
+			<button class="btn connect_btn">Connect wallet</button>
 		</div>
-
-		<div class="tx_result"></div>
-
-		<div id="address"></div>
-
-		<button class="btn">Connect wallet</button>
-
-		<button class="btn send_btn">Swap Tx</button>
-
-		<button class="btn pool_btn">Pool Tx</button>
 
 
 		<!-- Connecting javascript files -->
@@ -51,48 +65,38 @@
 			// Create JetPack instance
 			const jetpack = new JetPack(true)
 
+			var balances = null,
+				TIA = null
+
 			jetpack.on('error', message => {
 				console.log('Error: ' + message)
 
 				alert(message)
 			})
 
-			jetpack.on('connect', () => {
-				console.log('Connection successful.')
-
-				document.querySelector('.connection_status .red').style.display = 'none'
-				document.querySelector('.connection_status .green').style.display = 'inline-block'
-			})
-
-			jetpack.on('disconnect', () => {
-				console.log('Disconnected.')
-
-				document.querySelector('.connection_status .green').style.display = 'none'
-				document.querySelector('.connection_status .red').style.display = 'inline-block'
-
-				document.getElementById('address').innerHTML = ''
-
-				document.querySelector('.send_btn').style.display = 'none'
-				document.querySelector('.pool_btn').style.display = 'none'
-				document.querySelector('.btn').style.display = 'inline-block'
-			})
-
 
 			// Get connectWallet
 			function connectWallet() {
 				jetpack.connectWallet('pion-1').then(() => {
-					document.getElementById('address').innerHTML = `Your address:<br> ${jetpack.getAddress().slice(0, 9)}...${jetpack.getAddress().slice(-6)}`
+					balances = jetpack.getBalances()
 
-					document.querySelector('.btn').style.display = 'none'
-					document.querySelector('.send_btn').style.display = 'inline-block'
+					TIA = balances.find(balance => balance.denom === 'ibc/4CDD4BA98A61F9F797CE9C83582AB2DC48AF464C585BF4895A0604C10BE5CE3D')
+
+					document.querySelector('#address .val').innerHTML = jetpack.getAddress().slice(0, 9) + '...' + jetpack.getAddress().slice(-6)
+					document.querySelector('.pion_swap .max .val').innerHTML = parseFloat(TIA.amount) / Math.pow(10, TIA.exponent)
+
+					document.querySelector('.connect_btn').style.display = 'none'
+
+					document.querySelector('#address').style.display = 'flex'
+					document.querySelector('.pion_swap').style.display = 'block'
 				}).catch(error => {
 					alert(error)
 				})
 			}
 
 
-			// Send Tx
-			function sendTX() {
+			// Swap Tx
+			function swapTX() {
 				jetpack.sendTx([{
 					typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
 					value: {
@@ -101,27 +105,24 @@
 						msg: new TextEncoder().encode(JSON.stringify({ bond: {} })),
 						funds: [{
 							denom: 'ibc/4CDD4BA98A61F9F797CE9C83582AB2DC48AF464C585BF4895A0604C10BE5CE3D',
-							amount: '100000'
+							amount: `${parseFloat(document.querySelector('.pion_swap .input').value) * Math.pow(10, TIA.exponent)}`
 						}]
 					}
 				}]).then(result => {
 					if (result.type === 'error') {
-						document.querySelector('.tx_result').innerHTML = `Error:<br> ${result.message}`
-
-						setTimeout(() => {
-							document.querySelector('.tx_result').innerHTML = ''
-						}, 5000)
+						alert(error)
 					}
 
 					if (result.type === 'tx') {
-						document.querySelector('.tx_result').innerHTML = `Success:<br> ${result.hash}`
+						jetpack.loadBalances().then(() => {
+							balances = jetpack.getBalances()
 
-						document.querySelector('.send_btn').style.display = 'none'
-						document.querySelector('.pool_btn').style.display = 'inline-block'
+							TIA = balances.find(balance => balance.denom === 'ibc/4CDD4BA98A61F9F797CE9C83582AB2DC48AF464C585BF4895A0604C10BE5CE3D')
 
-						setTimeout(() => {
-							document.querySelector('.tx_result').innerHTML = ''
-						}, 5000)
+							document.querySelector('.pion_swap .max .val').innerHTML = parseFloat(TIA.amount) / Math.pow(10, TIA.exponent)
+						})
+
+						document.querySelector('.pion_swap .success').style.display = 'flex'
 					}
 				}).catch(error => {
 					console.log(error)
@@ -129,19 +130,22 @@
 			}
 
 
-			// Pool Tx
-			function poolTX() {
+			// Send Tx
+			function sendTX() {
 				jetpack.sendTx([{
-					typeUrl: '/astroport.liquidity.v1.MsgAddLiquidity',
+					typeUrl: '/ibc.applications.transfer.v1.MsgTransfer',
 					value: {
 						sender: jetpack.getAddress(),
-						pool_id: 'neutron1nfns3ck2ykrs0fknckrzd9728cyf77devuzernhwcwrdxw7ssk2s3tjf8r',
-						assets: [{
-							token: {
-								denom: 'factory/neutron1k6hr0f83e7un2wjf29cspk7j69jrnskk65k3ek2nj9dztrlzpj6q00rtsa/udatom',
-								amount: 10000
-							}
-						}]
+						receiver: 'neutron1kygcxajnu2euqwtc8hadqer84u9kcqmun70xxeq096h5esqqfs9qmus5gt',
+						memo: "{\"wasm\":{\"contract\":\"neutron1kygcxajnu2euqwtc8hadqer84u9kcqmun70xxeq096h5esqqfs9qmus5gt\",\"msg\":{\"bond\":{\"receiver\":\"neutron1p4hc20yrucx4hk4lf68wmuzvsa0rrxkuua7grf\"}}}}",
+						sourceChannel: 'channel-26',
+						sourcePort: 'transfer',
+						token: {
+							denom: 'utia',
+							amount: '100000'
+						},
+						timeoutHeight: {},
+						timeoutTimestamp: (Date.now() + 60000) * 1e6
 					}
 				}]).then(result => {
 					if (result.type === 'error') {
@@ -156,7 +160,7 @@
 						document.querySelector('.tx_result').innerHTML = `Success:<br> ${result.hash}`
 
 						document.querySelector('.send_btn').style.display = 'none'
-						document.querySelector('.pool_btn').style.display = 'inline-block'
+						// document.querySelector('.pool_btn').style.display = 'inline-block'
 
 						setTimeout(() => {
 							document.querySelector('.tx_result').innerHTML = ''
@@ -169,9 +173,8 @@
 
 
 			// Add click event listener to the button
-			document.querySelector('.btn').addEventListener('click', connectWallet)
-			document.querySelector('.send_btn').addEventListener('click', sendTX)
-			document.querySelector('.pool_btn').addEventListener('click', poolTX)
+			document.querySelector('.connect_btn').addEventListener('click', connectWallet)
+			document.querySelector('.swap_btn').addEventListener('click', swapTX)
 		</script>
 	</body>
 </html>
