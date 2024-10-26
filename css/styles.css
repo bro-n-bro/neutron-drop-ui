@@ -222,13 +222,13 @@ button
     position: absolute;
     z-index: 3;
     right: 0;
-    bottom: -106px;
+    bottom: -91px;
     left: 0;
 
     display: block;
 
-    width: 212px;
-    height: 212px;
+    width: 182px;
+    height: 182px;
     margin: 0 auto;
 
     border-radius: 50%;
@@ -241,7 +241,7 @@ button
     flex: 1 0 auto;
     flex-direction: column;
 
-    padding: 186px 33px 40px;
+    padding: 171px 33px 40px;
 }
 
 
