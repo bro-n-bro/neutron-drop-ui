@@ -37,7 +37,9 @@
 
 		<button class="btn">Connect wallet</button>
 
-		<button class="btn send_btn">Send Tx</button>
+		<button class="btn send_btn">Swap Tx</button>
+
+		<button class="btn pool_btn">Pool Tx</button>
 
 
 		<!-- Connecting javascript files -->
@@ -71,13 +73,14 @@
 				document.getElementById('address').innerHTML = ''
 
 				document.querySelector('.send_btn').style.display = 'none'
+				document.querySelector('.pool_btn').style.display = 'none'
 				document.querySelector('.btn').style.display = 'inline-block'
 			})
 
 
 			// Get connectWallet
 			function connectWallet() {
-				jetpack.connectWallet('neutron-1').then(() => {
+				jetpack.connectWallet('pion-1').then(() => {
 					document.getElementById('address').innerHTML = `Your address:<br> ${jetpack.getAddress().slice(0, 9)}...${jetpack.getAddress().slice(-6)}`
 
 					document.querySelector('.btn').style.display = 'none'
@@ -94,10 +97,10 @@
 					typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
 					value: {
 						sender: jetpack.getAddress(),
-						contract: 'neutron16m3hjh7l04kap086jgwthduma0r5l0wh8kc6kaqk92ge9n5aqvys9q6lxr',
+						contract: 'neutron1kygcxajnu2euqwtc8hadqer84u9kcqmun70xxeq096h5esqqfs9qmus5gt',
 						msg: new TextEncoder().encode(JSON.stringify({ bond: {} })),
 						funds: [{
-							denom: 'ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9',
+							denom: 'ibc/4CDD4BA98A61F9F797CE9C83582AB2DC48AF464C585BF4895A0604C10BE5CE3D',
 							amount: '10000'
 						}]
 					}
@@ -113,6 +116,48 @@
 					if (result.type === 'tx') {
 						document.querySelector('.tx_result').innerHTML = `Success:<br> ${result.hash}`
 
+						document.querySelector('.send_btn').style.display = 'none'
+						document.querySelector('.pool_btn').style.display = 'inline-block'
+
+						setTimeout(() => {
+							document.querySelector('.tx_result').innerHTML = ''
+						}, 5000)
+					}
+				}).catch(error => {
+					console.log(error)
+				})
+			}
+
+
+			// Pool Tx
+			function poolTX() {
+				jetpack.sendTx([{
+					typeUrl: '/astroport.liquidity.v1.MsgAddLiquidity',
+					value: {
+						sender: jetpack.getAddress(),
+						pool_id: 'neutron1nfns3ck2ykrs0fknckrzd9728cyf77devuzernhwcwrdxw7ssk2s3tjf8r',
+						assets: [{
+							token: {
+								denom: 'factory/neutron1k6hr0f83e7un2wjf29cspk7j69jrnskk65k3ek2nj9dztrlzpj6q00rtsa/udatom',
+								amount: 10000
+							}
+						}]
+					}
+				}]).then(result => {
+					if (result.type === 'error') {
+						document.querySelector('.tx_result').innerHTML = `Error:<br> ${result.message}`
+
+						setTimeout(() => {
+							document.querySelector('.tx_result').innerHTML = ''
+						}, 5000)
+					}
+
+					if (result.type === 'tx') {
+						document.querySelector('.tx_result').innerHTML = `Success:<br> ${result.hash}`
+
+						document.querySelector('.send_btn').style.display = 'none'
+						document.querySelector('.pool_btn').style.display = 'inline-block'
+
 						setTimeout(() => {
 							document.querySelector('.tx_result').innerHTML = ''
 						}, 5000)
@@ -126,6 +171,7 @@
 			// Add click event listener to the button
 			document.querySelector('.btn').addEventListener('click', connectWallet)
 			document.querySelector('.send_btn').addEventListener('click', sendTX)
+			document.querySelector('.pool_btn').addEventListener('click', poolTX)
 		</script>
 	</body>
 </html>

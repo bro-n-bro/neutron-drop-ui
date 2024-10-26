@@ -271,7 +271,8 @@ button
 }
 
 
-.btn.send_btn
+.btn.send_btn,
+.btn.pool_btn
 {
     display: none;
 }
