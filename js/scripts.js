@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	var balances = null,
 		TIA = null,
 		dTIA = null,
-		chain = 'mocha-4'
+		chain = 'pion-1'
 
 	jetpack.on('error', message => {
 		console.log('Error: ' + message)
