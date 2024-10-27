@@ -434,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 					$('.stake_section .TIA_input, .stake_section .dTIA_input').val('')
 
-					document.querySelector('.stake_section').style.display = 'none'
+					document.querySelector('.liquidity_section').style.display = 'none'
 					document.querySelector('.second_section').style.display = 'flex'
 				})
 			}
