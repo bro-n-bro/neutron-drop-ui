@@ -119,7 +119,14 @@
                 this.#jwBalances = data.balances
 
                 // Emit an event for balances reception
-                this._emit('balancesReceived', data.hash)
+                this._emit('balancesReceived', data.balances)
+            } else if (data.type === 'switchChain') {
+                // Save data
+                this.#jwAddress = data.address
+                this.#chainId = data.chain_id
+
+                // Emit an event for chain reception
+                this._emit('chainReceived', data.chain_id)
             } else if (data.type === 'tx') {
                 // Emit an event for transaction reception
                 this._emit('txReceived', data.hash)
@@ -318,6 +325,36 @@
                     data: {
                         peer_id: this.#peerID,
                         chain_id: this.#chainId,
+                        request_id: requestId
+                    }
+                })
+            })
+        }
+
+
+        // Public method to switch chain
+        switchChain(chain_id) {
+            return new Promise((resolve, reject) => {
+                if (!this.#isConnected || !this.#conn) {
+                    return reject('No connection established.')
+                }
+
+                // Generate a random ID
+                const requestId = this._generateRandomId()
+
+                // Save callback
+                this.#callbacks[requestId] = response => {
+                    response.type === 'error'
+                        ? reject(response.message)
+                        : resolve(response)
+                }
+
+                // Send message
+                this.#conn.send({
+                    method: 'switchChain',
+                    data: {
+                        peer_id: this.#peerID,
+                        chain_id: chain_id,
                         request_id: requestId
                     }
                 })

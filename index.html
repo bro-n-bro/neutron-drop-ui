@@ -24,7 +24,7 @@
 	</head>
 
 	<body>
-		<div class="first_section">
+		<section class="first_section">
 			<div class="image">
 				<img src="images/first_section_img.jpg" alt="" class="img">
 
@@ -36,10 +36,10 @@
 
 				<button class="btn connect_btn">Connect wallet</button>
 			</div>
-		</div>
+		</section>
 
 
-		<div class="second_section">
+		<section class="second_section">
 			<div class="image">
 				<img src="images/second_section_img.jpg" alt="" class="img">
 			</div>
@@ -57,35 +57,214 @@
 					<div class="denom">dTIA</div>
 				</div>
 
-				<button class="btn">Start staking</button>
+				<button class="btn stake_section_btn">Start staking</button>
 
-				<button class="btn">Provide liquidity</button>
-
-				<!-- <button class="btn swap_btn">Start staking</button> -->
-
-				<!-- <button class="btn pool_btn">Provide liquidity</button> -->
+				<button class="btn liquidity_section_btn">Provide liquidity</button>
 			</div>
-		</div>
+		</section>
 
 
-		<div class="data">
-			<div class="pion_swap">
-				<div class="amount">
-					<div class="label">
-						Amount:
-
-						<span class="max">Max.: <span class="val"></span> TIA</span>
+		<section class="stake_section">
+			<div class="back">
+				<button class="back_btn">
+					<div class="icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M20 12C20 11.4477 19.5523 11 19 11H7.83L12.71 6.12C13.1017 5.72829 13.1006 5.09284 12.7075 4.70251C12.3164 4.31412 11.6848 4.31524 11.295 4.705L5.13137 10.8686C4.73535 11.2646 4.53735 11.4627 4.46316 11.691C4.3979 11.8918 4.3979 12.1082 4.46316 12.309C4.53735 12.5373 4.73535 12.7354 5.13137 13.1314L11.2947 19.2947C11.6842 19.6842 12.3158 19.6842 12.7053 19.2947C13.0946 18.9054 13.0949 18.2743 12.7059 17.8847L7.83 13H19C19.5523 13 20 12.5523 20 12Z" fill="black"/>
+						</svg>
 					</div>
 
-					<div class="field">
-						<input type="number" inputmode="numeric" value="" class="input" placeholder="0.00">
+					<span>Staking</span>
+				</button>
+			</div>
 
-						<div class="denom">TIA</div>
+
+			<div class="form">
+				<div class="line chain">
+					<div class="label">Staking with</div>
+
+					<div class="field modal_cont">
+						<button type="button" class="current mini_modal_btn" data-modal-id="#chain_modal">
+							<div class="logo">
+								<img src="https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/celestiatestnet3/images/celestia.svg" alt="" loading="lazy">
+							</div>
+
+							<div class="val"><b>TIA</b> from <b class="chain">Mocha Testnet</b></div>
+
+							<div class="arr">
+								<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+									<path d="M21 11L14 18L7 11" stroke="#959696" stroke-width="1.5" stroke-linecap="round"/>
+								</svg>
+							</div>
+						</button>
+
+						<div class="mini_modal" id="chain_modal">
+							<button type="button" data-chain="mocha-4" class="active">
+								<div class="logo">
+									<img src="https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/celestiatestnet3/images/celestia.svg" alt="" loading="lazy">
+								</div>
+
+								<div class="val"><b>TIA</b> from <b class="chain">Mocha Testnet</b></div>
+							</button>
+
+							<button type="button" data-chain="pion-1">
+								<div class="logo">
+									<img src="https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/celestiatestnet3/images/celestia.svg" alt="" loading="lazy">
+								</div>
+
+								<div class="val"><b>TIA</b> from <b class="chain">Pion Testnet</b></div>
+							</button>
+						</div>
 					</div>
 				</div>
 
-				<div class="success">Swap Done</div>
+				<div class="line">
+					<div class="label">You stake</div>
+
+					<div class="field">
+						<input type="text" value="" class="input TIA_input" placeholder="1">
+
+						<div class="token">
+							<div class="logo">
+								<img src="https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/celestiatestnet3/images/celestia.svg" alt="" loading="lazy">
+							</div>
+
+							<span>TIA</span>
+						</div>
+					</div>
+
+					<div class="bottom">
+						<div class="balance">You have <span><span class="val">O</span> TIA</span> in your balance</div>
+
+						<div class="btns">
+							<button type="button" class="half_btn">Half</button>
+
+							<button type="button" class="max_btn">Max</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="line">
+					<div class="label">You receive</div>
+
+					<div class="field">
+						<input type="text" value="" class="input dTIA_input" placeholder="0.9999">
+
+						<div class="token">
+							<div class="logo">
+								<img src="https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/celestiatestnet3/images/celestia.svg" alt="" loading="lazy">
+							</div>
+
+							<span>dTIA</span>
+						</div>
+					</div>
+				</div>
 			</div>
+
+
+			<div class="exp">
+				<div>
+					<div class="label">Exchange rate</div>
+
+					<div class="val">1 TIA = 0,9999 dTIA</div>
+				</div>
+
+				<div>
+					<div class="label">Reward rate</div>
+
+					<div class="val">-</div>
+				</div>
+
+				<div>
+					<div class="label">Minimum stake</div>
+
+					<div class="val">0.0001 TIA</div>
+				</div>
+			</div>
+
+
+			<button class="btn swap_btn disabled">Stake</button>
+			<button class="btn send_btn show disabled">Stake</button>
+		</section>
+
+
+		<section class="liquidity_section">
+			<div class="back">
+				<button class="back_btn">
+					<div class="icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M20 12C20 11.4477 19.5523 11 19 11H7.83L12.71 6.12C13.1017 5.72829 13.1006 5.09284 12.7075 4.70251C12.3164 4.31412 11.6848 4.31524 11.295 4.705L5.13137 10.8686C4.73535 11.2646 4.53735 11.4627 4.46316 11.691C4.3979 11.8918 4.3979 12.1082 4.46316 12.309C4.53735 12.5373 4.73535 12.7354 5.13137 13.1314L11.2947 19.2947C11.6842 19.6842 12.3158 19.6842 12.7053 19.2947C13.0946 18.9054 13.0949 18.2743 12.7059 17.8847L7.83 13H19C19.5523 13 20 12.5523 20 12Z" fill="black"/>
+						</svg>
+					</div>
+
+					<span>Provide liquidity</span>
+				</button>
+			</div>
+
+			<div class="form">
+				<div class="section TIA_section">
+					<div class="token_label">
+						<div class="logo">
+							<img src="https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/celestiatestnet3/images/celestia.svg" alt="" loading="lazy">
+						</div>
+
+						<span>TIA</span>
+					</div>
+
+					<div class="field">
+						<input type="text" name="" value="" class="input TIA_input" placeholder="0">
+
+						<div class="price"><span>0,00</span>$</div>
+
+						<div class="balance">In Wallet: <span>0,00</span></div>
+					</div>
+				</div>
+
+				<div class="section dTIA_section">
+					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" class="plus">
+						<circle cx="16" cy="16" r="15" fill="#7B2BF9" stroke="#19076E" stroke-width="2"/>
+						<rect x="15" y="10" width="2" height="12" rx="1" fill="white"/>
+						<rect x="22" y="15" width="2" height="12" rx="1" transform="rotate(90 22 15)" fill="white"/>
+					</svg>
+
+					<div class="token_label">
+						<div class="logo">
+							<img src="https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/celestiatestnet3/images/celestia.svg" alt="" loading="lazy">
+						</div>
+
+						<span>dTIA</span>
+					</div>
+
+					<div class="field">
+						<input type="text" name="" value="" class="input dTIA_input" placeholder="0">
+
+						<div class="price"><span>0,00</span>$</div>
+
+						<div class="balance">In Wallet: <span>0,00</span></div>
+
+						<button type="button" class="max_btn">Max</button>
+					</div>
+				</div>
+			</div>
+
+			<button class="btn pool_btn disabled">Add Liquidity</button>
+		</section>
+
+
+
+		<section class="modal">
+			<div class="modal_content">
+				<div class="data">
+					<div class="title">Almost ready</div>
+
+					<div class="desc">Go to Jet Wallet and confirm transaction</div>
+
+					<img src="images/go_modal_img.jpg" alt="">
+
+					<button class="btn">Ok</button>
+				</div>
+			</div>
+
+			<div class="modal_overlay"></div>
 		</div>
 
 
@@ -94,186 +273,7 @@
 		<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 		<script src="js/jetPack.js"></script>
 
-		<script>
-			// Create JetPack instance
-			const jetpack = new JetPack(true)
-
-			var balances = null,
-				TIA = null,
-				dTIA = null
-
-			jetpack.on('error', message => {
-				console.log('Error: ' + message)
-
-				alert(message)
-			})
-
-
-			// Get connectWallet
-			function connectWallet() {
-				jetpack.connectWallet('pion-1').then(() => {
-					balances = jetpack.getBalances()
-
-					TIA = balances.find(balance => balance.denom === 'ibc/4CDD4BA98A61F9F797CE9C83582AB2DC48AF464C585BF4895A0604C10BE5CE3D')
-					dTIA = balances.find(balance => balance.denom === 'factory/neutron1tkr6mtll5e2z53ze2urnc3ld3tq3dam2rchezc5lg9c237ft66gqtw94jm/drop')
-
-					document.querySelector('.second_section .balance .val').innerHTML = (parseFloat(dTIA.amount) / Math.pow(10, dTIA.exponent)).toFixed(3)
-
-					document.querySelector('.first_section').style.display = 'none'
-					document.querySelector('.second_section').style.display = 'flex'
-				}).catch(error => {
-					alert(error)
-				})
-			}
-
-
-			// Swap Tx
-			function swapTX() {
-				jetpack.sendTx([{
-					typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
-					value: {
-						sender: jetpack.getAddress(),
-						contract: 'neutron1kygcxajnu2euqwtc8hadqer84u9kcqmun70xxeq096h5esqqfs9qmus5gt',
-						msg: new TextEncoder().encode(JSON.stringify({ bond: {} })),
-						funds: [{
-							denom: 'ibc/4CDD4BA98A61F9F797CE9C83582AB2DC48AF464C585BF4895A0604C10BE5CE3D',
-							amount: `${parseFloat(document.querySelector('.pion_swap .input').value) * Math.pow(10, TIA.exponent)}`
-						}]
-					}
-				}]).then(result => {
-					if (result.type === 'error') {
-						alert(error)
-					}
-
-					if (result.type === 'tx') {
-						jetpack.loadBalances().then(() => {
-							balances = jetpack.getBalances()
-
-							TIA = balances.find(balance => balance.denom === 'ibc/4CDD4BA98A61F9F797CE9C83582AB2DC48AF464C585BF4895A0604C10BE5CE3D')
-
-							document.querySelector('.pion_swap .max .val').innerHTML = parseFloat(TIA.amount) / Math.pow(10, TIA.exponent)
-						})
-
-						document.querySelector('.pion_swap .success').style.display = 'flex'
-					}
-				}).catch(error => {
-					console.log(error)
-				})
-			}
-
-
-			// Send Tx
-			function sendTX() {
-				jetpack.sendTx([{
-					typeUrl: '/ibc.applications.transfer.v1.MsgTransfer',
-					value: {
-						sender: jetpack.getAddress(),
-						receiver: 'neutron1kygcxajnu2euqwtc8hadqer84u9kcqmun70xxeq096h5esqqfs9qmus5gt',
-						memo: "{\"wasm\":{\"contract\":\"neutron1kygcxajnu2euqwtc8hadqer84u9kcqmun70xxeq096h5esqqfs9qmus5gt\",\"msg\":{\"bond\":{\"receiver\":\"neutron1p4hc20yrucx4hk4lf68wmuzvsa0rrxkuua7grf\"}}}}",
-						sourceChannel: 'channel-26',
-						sourcePort: 'transfer',
-						token: {
-							denom: 'utia',
-							amount: '100000'
-						},
-						timeoutHeight: {},
-						timeoutTimestamp: (Date.now() + 60000) * 1e6
-					}
-				}]).then(result => {
-					if (result.type === 'error') {
-						document.querySelector('.tx_result').innerHTML = `Error:<br> ${result.message}`
-
-						setTimeout(() => {
-							document.querySelector('.tx_result').innerHTML = ''
-						}, 5000)
-					}
-
-					if (result.type === 'tx') {
-						document.querySelector('.tx_result').innerHTML = `Success:<br> ${result.hash}`
-
-						document.querySelector('.send_btn').style.display = 'none'
-						// document.querySelector('.pool_btn').style.display = 'inline-block'
-
-						setTimeout(() => {
-							document.querySelector('.tx_result').innerHTML = ''
-						}, 5000)
-					}
-				}).catch(error => {
-					console.log(error)
-				})
-			}
-
-
-			// Pool Tx
-			function poolTX() {
-				jetpack.sendTx([{
-					typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
-					value: {
-						sender: jetpack.getAddress(),
-						contract: 'neutron16keevuz58qyu6jaj294cj3ulrtz3h02mg47gu4p95veuv7n783psajpwdk',
-						funds: [
-							{
-								amount: '10000',
-								denom: 'factory/neutron1tkr6mtll5e2z53ze2urnc3ld3tq3dam2rchezc5lg9c237ft66gqtw94jm/drop'
-							},
-							{
-								amount: '10000',
-								denom: 'ibc/4CDD4BA98A61F9F797CE9C83582AB2DC48AF464C585BF4895A0604C10BE5CE3D'
-							}
-						],
-						msg: new TextEncoder().encode(JSON.stringify({
-							provide_liquidity: {
-								assets: [
-									{
-										amount: '10000',
-										info: {
-											'native_token': {
-												denom: 'factory/neutron1tkr6mtll5e2z53ze2urnc3ld3tq3dam2rchezc5lg9c237ft66gqtw94jm/drop'
-											}
-										}
-									},
-									{
-										amount: '10000',
-										info: {
-											'native_token': {
-												denom: 'ibc/4CDD4BA98A61F9F797CE9C83582AB2DC48AF464C585BF4895A0604C10BE5CE3D'
-											}
-										}
-									}
-								],
-								'auto_stake': false
-							}
-						}))
-					}
-				}]).then(result => {
-					if (result.type === 'error') {
-						document.querySelector('.tx_result').innerHTML = `Error:<br> ${result.message}`
-
-						setTimeout(() => {
-							document.querySelector('.tx_result').innerHTML = ''
-						}, 5000)
-					}
-
-					if (result.type === 'tx') {
-						document.querySelector('.tx_result').innerHTML = `Success:<br> ${result.hash}`
-
-						document.querySelector('.send_btn').style.display = 'none'
-						// document.querySelector('.pool_btn').style.display = 'inline-block'
-
-						setTimeout(() => {
-							document.querySelector('.tx_result').innerHTML = ''
-						}, 5000)
-					}
-				}).catch(error => {
-					console.log(error)
-				})
-			}
-
-
-			// Add click event listener to the button
-			document.querySelector('.connect_btn').addEventListener('click', connectWallet)
-			// document.querySelector('.swap_btn').addEventListener('click', swapTX)
-			// document.querySelector('.pool_btn').addEventListener('click', poolTX)
-		</script>
+		<script src="js/jquery-3.6.3.min.js"></script>
+		<script src="js/scripts.js"></script>
 	</body>
 </html>

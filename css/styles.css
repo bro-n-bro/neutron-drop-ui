@@ -193,6 +193,42 @@ button
 
 
 
+/*----------------
+    Mini modal
+----------------*/
+.modal_cont
+{
+    position: relative;
+}
+
+
+.mini_modal
+{
+    position: absolute;
+    z-index: 100;
+    top: 100%;
+    left: 0;
+
+    visibility: hidden;
+
+    transition: .2s linear;
+    pointer-events: none;
+
+    opacity: 0;
+}
+
+
+.mini_modal.active
+{
+    visibility: visible;
+
+    pointer-events: auto;
+
+    opacity: 1;
+}
+
+
+
 .first_section
 {
     display: flex;
@@ -379,62 +415,575 @@ button
 
 
 
-.label
+.stake_section
 {
-    font-size: 14px;
+    display: none;
+    flex: 1 0 auto;
+    flex-direction: column;
 
+    padding-bottom: 40px;
+}
+
+
+
+.stake_section .back
+{
+    margin-bottom: 2px;
+    padding: 10px;
+}
+
+
+.stake_section .back_btn
+{
+    font-weight: 600;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+
+.stake_section .back_btn .icon
+{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+}
+
+
+.stake_section .back_btn .icon svg
+{
+    display: block;
+
+    width: 24px;
+    height: 24px;
+}
+
+
+
+.stake_section .form
+{
+    font-size: 16px;
+
+    padding: 0 10px;
+}
+
+
+
+.stake_section .exp
+{
+    font-size: 16px;
+
+    margin-top: 44px;
+    padding: 10px;
+
+    color: #959696;
+}
+
+
+.stake_section .exp > *
+{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.stake_section .exp > * + *
+{
+    margin-top: 12px;
+}
+
+
+.stake_section .swap_btn,
+.stake_section .send_btn
+{
+    width: calc(100% - 20px);
+    margin: auto 10px 0 !important;
+}
+
+
+
+.liquidity_section
+{
+    display: none;
+    flex: 1 0 auto;
+    flex-direction: column;
+
+    padding-bottom: 40px;
+}
+
+
+
+.liquidity_section .back
+{
+    margin-bottom: 2px;
+    padding: 10px;
+}
+
+
+.liquidity_section .back_btn
+{
+    font-weight: 600;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+
+.liquidity_section .back_btn .icon
+{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+}
+
+
+.liquidity_section .back_btn .icon svg
+{
+    display: block;
+
+    width: 24px;
+    height: 24px;
+}
+
+
+
+.liquidity_section .form
+{
+    font-size: 16px;
+
+    padding: 0 10px;
+}
+
+
+.liquidity_section .form .section
+{
+    position: relative;
+
+    display: flex;
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    padding: 13px 11px;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    background: #f4f4f4;
+}
+
+
+.liquidity_section .form .section + .section
+{
+    margin-top: 12px;
+}
+
+
+.liquidity_section .form .token_label
+{
+    font-weight: 700;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    width: calc(50% - 2px);
+    height: 44px;
+    padding: 7px;
+
+    color: #19076e;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    background: #fff;
+
+    gap: 6px;
+}
+
+
+.liquidity_section .form .token_label .logo
+{
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+}
+
+
+.liquidity_section .form .token_label .logo img
+{
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: inherit;
+}
+
+
+.liquidity_section .form .field
+{
     display: flex;
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
 
-    margin-bottom: 8px;
+    width: calc(50% - 2px);
 }
 
 
-.field
+.liquidity_section .form .input
+{
+    width: 100%;
+    height: 44px;
+    padding-right: 7px;
+    padding-bottom: 19px;
+    padding-left: 7px;
+
+    text-align: right;
+
+    color: #19076e;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    background: #fff;
+}
+
+
+.liquidity_section .form .price
+{
+    font-size: 16px;
+
+    position: absolute;
+    z-index: 3;
+    top: 22px;
+    right: 8px;
+
+    white-space: nowrap;
+    pointer-events: none;
+
+    color: #959696;
+}
+
+
+.liquidity_section .form .plus
+{
+    position: absolute;
+    z-index: 3;
+    top: -23px;
+    right: 0;
+    left: 0;
+
+    display: block;
+
+    margin: 0 auto;
+
+    pointer-events: none;
+}
+
+
+.liquidity_section .form .balance
+{
+    font-size: 12px;
+
+    margin-top: 2px;
+
+    color: #959696;
+}
+
+
+.liquidity_section .form .balance span
+{
+    color: #3011a0;
+}
+
+
+.liquidity_section .form .max_btn
+{
+    font-weight: 600;
+
+    margin-top: 2px;
+    margin-left: auto;
+
+    color: #19076e;
+}
+
+
+.liquidity_section .pool_btn
+{
+    width: calc(100% - 20px);
+    margin: auto 10px 0 !important;
+}
+
+
+
+.form ::-webkit-input-placeholder
+{
+    color: #959696;
+}
+
+.form :-moz-placeholder
+{
+    color: #959696;
+}
+
+.form ::-moz-placeholder
+{
+    opacity: 1;
+    color: #959696;
+}
+
+.form :-ms-input-placeholder
+{
+    color: #959696;
+}
+
+
+.form .line
+{
+    margin-bottom: 20px;
+}
+
+
+.form .label
+{
+    margin-bottom: 2px;
+
+    color: #959696;
+}
+
+
+.form .field
 {
     position: relative;
-
-    padding: 1px;
-
-    border-radius: 10px;
-    background: linear-gradient(to bottom,  #5d33ce 0%,#200750 100%);
 }
 
 
-.input,
-.input:focus
+.form .input
 {
-    font-family: var(--font_family);
-    font-size: 16px;
-    font-weight: 500;
-    line-height: normal;
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 700;
 
     display: block;
 
     width: 100%;
-    height: 48px;
-    padding: 0 15px;
-
-    transition: .2s linear;
-    transition-property: border-color, opacity;
+    height: 58px;
+    padding: 0 13px;
 
     color: currentColor;
-    border: 1px solid #1a0242;
-    border-radius: 10px;
-    background: #170232;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    background: none;
+}
+
+.form .input:-webkit-autofill
+{
+    -webkit-box-shadow: inset 0 0 0 50px var(--form_bg_color) !important;
 }
 
 
+.form .chain .current
+{
+    font-weight: 600;
 
-.amount .denom
+    position: relative;
+    z-index: 9;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 58px;
+    padding: 0 13px;
+
+    color: #959696;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+
+    gap: 6px;
+}
+
+
+.form .chain .current .logo
+{
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+}
+
+
+.form .chain .current .logo img
+{
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: inherit;
+}
+
+
+.form .chain .current b
+{
+    color: #000;
+}
+
+
+.form .chain .current .arr
 {
     position: absolute;
     z-index: 3;
     top: 0;
+    right: 14px;
+    bottom: 0;
+
+    display: block;
+
+    width: 28px;
+    height: 28px;
+    margin: auto 0;
+
+    transition: transform .2s linear;
+    pointer-events: none;
+
+    color: #959696;
+}
+
+
+.form .chain .current.active
+{
+    border-color: transparent;
+}
+
+.form .chain .current.active .arr
+{
+    transform: rotate(180deg);
+}
+
+
+.form .chain .mini_modal
+{
+    z-index: 7;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    padding-top: 67px;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    background: #fff;
+}
+
+
+.form .chain .mini_modal:before
+{
+    position: absolute;
+    top: 58px;
     right: 0;
+    left: 0;
+
+    display: block;
+
+    width: calc(100% - 26px);
+    height: 1px;
+    margin: 0 auto;
+
+    content: '';
+
+    background: #d9d9d9;
+}
+
+
+.form .chain .mini_modal button
+{
+    font-weight: 600;
+
+    position: relative;
+    z-index: 9;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 58px;
+    padding: 0 13px;
+
+    color: #959696;
+
+    gap: 6px;
+}
+
+
+.form .chain .mini_modal button .logo
+{
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+}
+
+
+.form .chain .mini_modal button .logo img
+{
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: inherit;
+}
+
+
+.form .chain .mini_modal button b
+{
+    color: #000;
+}
+
+
+.form .chain .mini_modal button.active
+{
+    display: none;
+}
+
+
+.form .token
+{
+    font-size: 18px;
+    font-weight: 700;
+
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 14px;
 
     display: flex;
     align-content: center;
@@ -443,59 +992,75 @@ button
     justify-content: flex-start;
 
     height: 100%;
-    padding: 0 16px;
 
-    text-transform: uppercase;
+    pointer-events: none;
+
+    color: #19076e;
+
+    gap: 6px;
 }
 
 
-
-.amount .max
+.form .token .logo
 {
-    font-size: 12px;
+    width: 36px;
+    height: 36px;
 
-    opacity: .5;
+    border-radius: 50%;
 }
 
 
-
-.pion_swap
+.form .token .logo img
 {
-    position: relative;
-
-    display: none;
-
-    width: 100%;
-}
-
-
-.pion_swap .swap_btn
-{
-    margin-top: 28px;
-}
-
-
-.pion_swap .success
-{
-    font-size: 20px;
-
-    position: absolute;
-    z-index: 5;
-    top: 0;
-    left: 0;
-
-    display: none;
-    align-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: block;
 
     width: 100%;
     height: 100%;
 
-    text-align: center;
+    border-radius: inherit;
+}
 
-    background: #111;
+
+.form .bottom
+{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    margin-top: 6px;
+}
+
+
+.form .balance
+{
+    color: #959696;
+}
+
+
+.form .balance span
+{
+    color: #3011a0;
+}
+
+
+.form .btns
+{
+    font-size: 18px;
+    font-weight: 600;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    margin-left: auto;
+
+    color: #19076e;
+
+    gap: 18px;
 }
 
 
@@ -515,7 +1080,154 @@ button
 }
 
 
+.btn.send_btn,
+.btn.swap_btn
+{
+    display: none;
+}
+
+.btn.show
+{
+    display: block;
+}
+
+.btn.disabled
+{
+    pointer-events: none;
+
+    color: #959696;
+    background: #f2f2f2;
+}
+
+
 .btn + .btn
 {
     margin-top: 20px;
+}
+
+
+
+
+
+
+
+/*-----------
+    Modal
+-----------*/
+.modal_overlay
+{
+    position: fixed;
+    z-index: 90;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, .50);
+
+    -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+}
+
+
+
+.modal
+{
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+
+    display: none;
+
+    width: 100%;
+    height: 100%;
+    min-height: -moz-available;
+    min-height: -webkit-fill-available;
+    min-height:         fill-available;
+
+    pointer-events: none;
+}
+
+
+.modal_content
+{
+    position: absolute;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    overflow: auto;
+    flex-wrap: wrap;
+
+    width: 100%;
+    max-height: 100%;
+    padding: 40px 0 0;
+}
+
+
+.modal_content .data
+{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    padding: 30px;
+
+    pointer-events: auto;
+
+    border-radius: 30px 30px 0 0;
+    background: #fff;
+    box-shadow: 0 -115px 32px 0 rgba(0, 0, 0, .00), 0 -74px 30px 0 rgba(0, 0, 0, .01), 0 -42px 25px 0 rgba(0, 0, 0, .03), 0 -18px 18px 0 rgba(0, 0, 0, .05), 0 -5px 10px 0 rgba(0, 0, 0, .05);
+}
+
+
+.modal_content .title
+{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+.modal_content .desc
+{
+    font-size: 16px;
+
+    margin-top: 1px;
+}
+
+
+.modal_content img
+{
+    display: block;
+
+    width: 100%;
+    margin-top: 22px;
+
+    border-radius: 10px;
+}
+
+
+.modal_content .btn
+{
+    margin-top: 30px;
+}
+
+
+.modal_overlay
+{
+    position: fixed;
+    z-index: 90;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(244, 244, 244, .46);
+
+            backdrop-filter: blur(2.45px);
+    -webkit-backdrop-filter: blur(2.45px);
 }
