@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	})
 
 
-	$('.stake_section .TIA_input').keydown(function(e) {
+	$('.stake_section .TIA_input').keyup(function(e) {
 		let _self = $(this)
 
 		setTimeout(() => {
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		})
 	})
 
-	$('.stake_section .dTIA_input').keydown(function(e) {
+	$('.stake_section .dTIA_input').keyup(function(e) {
 		let _self = $(this)
 
 		setTimeout(() => {
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	})
 
 
-	$('.liquidity_section .TIA_input').keydown(function(e) {
+	$('.liquidity_section .TIA_input').keyup(function(e) {
 		let _self = $(this),
 			maxAmount = Math.min(parseFloat(dTIA.amount) / Math.pow(10, dTIA.exponent), parseFloat(TIA.amount) / Math.pow(10, TIA.exponent))
 
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		})
 	})
 
-	$('.liquidity_section .dTIA_input').keydown(function(e) {
+	$('.liquidity_section .dTIA_input').keyup(function(e) {
 		let _self = $(this),
 			maxAmount = Math.min(parseFloat(dTIA.amount) / Math.pow(10, dTIA.exponent), parseFloat(TIA.amount) / Math.pow(10, TIA.exponent))
 
